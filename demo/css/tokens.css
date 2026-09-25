@@ -1,0 +1,78 @@
+/* ==========================================================================
+   TOKENS: the skin of the site.
+   Every colour, font and size the site uses is set here and nowhere else.
+   A client does not edit this file. Put their values in
+   clients/<client>/tokens.json and the build adds them at the bottom,
+   where they win over these defaults.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Geist";
+  src: url("../fonts/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("../fonts/GeistMono-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---- Type ------------------------------------------------------------ */
+  --font-sans: "Geist", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; /* everything */
+  --font-mono: "Geist Mono", ui-monospace, Menlo, Consolas, monospace;           /* labels, HEX values, specs */
+
+  /* ONE number sets the size of all reading text.
+     1   = the original template (12px body, small)
+     1.5 = 18px body (the house default)
+     Nothing in the grid depends on this, so any value is safe. */
+  --type-scale: 1.5;
+
+  --fs-body:  calc(12px * var(--type-scale));   /* paragraphs, row titles */
+  --lh-body:  1.5;
+  --fs-h2:    calc(22px * var(--type-scale));   /* "Introduction", prev/next titles */
+  --fs-hero:  calc(35px * var(--type-scale));   /* "01 Logo" on the coloured header */
+  --fs-word:  calc(35px * var(--type-scale));   /* big words in the keyword lists */
+  --fs-chrome: calc(12px + (var(--type-scale) - 1) * 2px); /* menu, buttons, labels: stays small */
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 650;
+
+  /* ---- Colour: the site itself (not the client's palette) --------------- */
+  --c-ground:       #F6F5F2;  /* page background */
+  --c-surface:      #FFFFFF;  /* cards, buttons */
+  --c-ink:          #141414;  /* main text */
+  --c-muted:        #62605B;  /* secondary text */
+  --c-rule:         #DDDBD6;  /* hairlines between rows */
+  --c-panel-border: #CCCAC4;  /* border around image panels */
+  --c-panel-fill:   #E9E7E2;  /* empty image placeholder */
+  --c-prevnext:     #ECEAE5;  /* previous / next strip */
+  --c-accent:       #141414;  /* slider markers, active menu item */
+  --c-header:       #141414;  /* coloured header on every page (override per page in content.json) */
+  --c-header-text:  #F6F5F2;
+  --c-footer:       #141414;
+  --c-footer-text:  #F6F5F2;
+  --c-footer-muted: #9A978F;
+
+  /* ---- Shape ----------------------------------------------------------- */
+  --radius-button: 4px;
+  --radius-pill: 100px;
+  --radius-menu: 10px;
+  --shadow-menu: 0 16px 30px -12px rgb(0 0 0 / .18);
+
+  /* ---- Layout (measured from the reference, change with care) ---------- */
+  --sidebar-w: 280px;
+  --content-max: 1400px;
+  --gutter: 20px;
+  --row-gap: 20px;
+  --row-pad-bottom: 80px;
+  --header-h: 220px;        /* coloured header on every page but the first */
+  --header-h-home: 589px;   /* taller header on the first page */
+  --panel-ratio: 1.61;
+  --topbar-h: 64px;
+}
