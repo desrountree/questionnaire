@@ -11,6 +11,8 @@
 /* chapter titles use the guidelines' row-title size ("Overview"), not the big "Introduction" size:
    seven of them on one page would shout */
 .q-chapter .row__text h2 { font-size: var(--fs-body); line-height: var(--lh-body); font-weight: 700; letter-spacing: -0.01em; }
+/* on a phone each screen holds one chapter, so its title keeps the larger size it started with (Des, 25 Sep) */
+body.is-stepped .q-chapter .row__text h2 { font-size: clamp(24px, 2.2vw + 12px, var(--fs-h2)); line-height: 1.2; }
 .q-chapter__num { color: var(--c-muted); font-variant-numeric: tabular-nums; }
 .q-intro { margin-top: .6em; }
 .q-chapter .grid { padding-bottom: 64px; }
