@@ -278,7 +278,7 @@ figure { margin: 0; }
 .footer__row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--row-gap); align-items: start; }
 .footer__contact { display: grid; gap: 14px; font-size: var(--fs-chrome); line-height: 1.5; }
 .footer__contact h3 { font-size: var(--fs-chrome); font-weight: 700; }
-.footer__contact a, .footer__contact p { color: var(--c-footer-muted); text-decoration: none; }
+.footer__contact a, .footer__contact p { color: var(--c-footer-muted); text-decoration: none; overflow-wrap: anywhere; }  /* a long email wraps rather than pushing Back to top off a phone */
 .footer__contact a:hover { color: var(--c-footer-text); }
 .footer__logo { color: var(--c-footer-text); }
 .footer__logo img, .footer__logo svg { height: 35px; width: auto; max-width: 200px; object-fit: contain; object-position: left center; }

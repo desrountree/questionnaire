@@ -16,7 +16,10 @@ body.is-stepped .q-chapter .row__text h2 { font-size: clamp(24px, 2.2vw + 12px, 
 .q-chapter__num { color: var(--c-muted); font-variant-numeric: tabular-nums; }
 .q-intro { margin-top: .6em; }
 .q-chapter .grid { padding-bottom: 64px; }
-.q-steps { display: grid; gap: 56px; max-width: 760px; }
+.q-steps { display: grid; gap: 56px; }
+/* every block takes the full tracks, as the reference's blocks do; only running text keeps a measure: its 80%, like the intro's */
+@media screen and (min-width: 810px) { .q-text, .q-bullets, .q-label, .q-hint { max-width: 80%; } }
+.q-page .q-step:focus, .q-page .q-step:focus-visible { outline: none; }   /* Next moves focus to the screen, not a frame round it */
 .q-step { min-width: 0; outline: none; }
 .q-text + .q-text, .q-text + .q-bullets, .q-bullets + .q-text, .q-text + .q-field { margin-top: 1em; }
 .q-bullets { list-style: disc; padding-left: 1.2em; }
@@ -41,29 +44,27 @@ body.is-stepped .q-chapter .row__text h2 { font-size: clamp(24px, 2.2vw + 12px, 
 .qform textarea:hover, .qform input[type="text"]:hover { border-color: var(--c-muted); }
 .qform textarea:focus, .qform input[type="text"]:focus { border-color: var(--c-ink); outline: none; }
 .q-page :focus-visible { outline: 2px solid var(--c-ink); outline-offset: 2px; }
-.qform textarea:focus-visible, .qform input[type="text"]:focus-visible { outline: 1px solid var(--c-ink); outline-offset: 0; }
+.qform textarea:focus-visible, .qform input[type="text"]:focus-visible { outline: none; }   /* the ink border alone: the site draws no 2px line */
 
-/* ---- Chips: pick one (radio) or tick any (checkbox) ------------------------- */
-.q-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.q-chip { position: relative; display: inline-flex; }
+/* ---- Answers: the sidebar's active row on the reference's two-column list grid (gauntlet, 26 Sep) ---------
+   Labels in the menu's own dark regular weight; a pick gets the menu's hairline box, white surface and bold. No fill.
+   Tick-all answers carry the tone slider's square marker (hollow, then filled), so one-versus-many shows at a glance. */
+.q-chips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px var(--row-gap); }
+.q-chip { position: relative; display: flex; margin-left: -12px; min-width: 0; }   /* label text lines up with the column, the box sits outside it, as in the menu */
 .q-chip input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
 .q-chip span {
-  display: inline-flex; align-items: center; min-height: 44px; padding: 10px 18px;
-  background: var(--c-surface); border: 1px solid var(--c-panel-border); border-radius: var(--radius-button);
-  font-size: max(var(--fs-chrome), 15px); line-height: 1.2;
-  transition: border-color .15s, background .15s, color .15s;
+  display: flex; align-items: center; width: 100%; min-height: 34px; padding: 8px 12px;
+  border: 1px solid transparent; border-radius: var(--radius-button);
+  font-size: var(--fs-chrome); line-height: 1.2; color: var(--c-ink);
 }
-@media (hover: hover) { .q-chip:hover span { border-color: var(--c-ink); } }
-.q-chip input:checked + span { background: var(--c-ink); color: var(--c-ground); border-color: var(--c-ink); }
+@media (hover: hover) { .q-chip:hover span { text-decoration: underline; text-underline-offset: 3px; } }
+.q-chips--ticks .q-chip span::before {   /* the slider's marker: 10px, 2px corner; hollow until ticked */
+  content: ""; flex: none; width: 10px; height: 10px; margin-right: 10px; border-radius: 2px;
+  background: var(--c-ground); box-shadow: inset 0 0 0 1px var(--c-muted);
+}
+.q-chips--ticks .q-chip input:checked + span::before { background: var(--c-accent); box-shadow: none; }
+.q-chip input:checked + span { border-color: var(--c-panel-border); background: var(--c-surface); color: var(--c-ink); font-weight: 600; text-decoration: none; }
 .q-chip input:focus-visible + span { outline: 2px solid var(--c-ink); outline-offset: 2px; }
-.q-chips--ticks .q-chip span::before {
-  content: ""; width: 12px; height: 12px; margin-right: 10px; flex: none;
-  border: 1px solid currentColor; border-radius: 2px;
-}
-.q-chips--ticks .q-chip input:checked + span::before {
-  background: currentColor;
-  box-shadow: inset 0 0 0 2px var(--c-ink);
-}
 .qform textarea.q-other { margin-top: 12px; min-height: 3em; }
 
 /* ---- Sliders: the Tone of Voice sliders, now draggable ---------------------- */
@@ -87,11 +88,11 @@ body.is-stepped .q-chapter .row__text h2 { font-size: clamp(24px, 2.2vw + 12px, 
 .q-nounlist { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
 .q-nounlist:empty { display: none; }
 .q-noun {
-  display: inline-flex; align-items: center; gap: 2px; min-height: 44px; padding: 4px 4px 4px 16px;
+  display: inline-flex; align-items: center; gap: 2px; padding: 2px 2px 2px 16px;   /* the button's height */
   background: var(--c-surface); border: 1px solid var(--c-panel-border); border-radius: var(--radius-button);
   font-size: max(var(--fs-chrome), 15px); line-height: 1.2;
 }
-.q-noun.is-nudged { border-style: dashed; border-color: var(--c-muted); }
+.q-noun.is-nudged { color: var(--c-muted); }   /* hard to draw: the label greys, the note below says why */
 .q-noun__remove { position: relative; width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border-radius: 2px; color: var(--c-muted); }
 .q-noun__remove::after { content: ""; position: absolute; inset: -4px; }   /* a 44px target */
 @media (hover: hover) { .q-noun__remove:hover { color: var(--c-ink); background: var(--c-ground); } }
@@ -99,7 +100,7 @@ body.is-stepped .q-chapter .row__text h2 { font-size: clamp(24px, 2.2vw + 12px, 
 .q-count { margin-bottom: 16px; font-size: var(--fs-chrome); color: var(--c-muted); }
 .q-count:empty { display: none; }
 .q-nudge { margin-bottom: 16px; padding: 12px 14px; background: var(--c-surface); border: 1px solid var(--c-rule); }   /* the guidelines card look */
-.q-link { font-size: var(--fs-chrome); color: var(--c-muted); text-decoration: underline; text-underline-offset: 3px; padding: 12px 0; }
+.q-link { font-size: var(--fs-chrome); color: var(--c-muted); text-decoration: none; padding: 12px 0; }   /* grey, never underlined, as the sidebar's section links */
 @media (hover: hover) { .q-link:hover { color: var(--c-ink); } }
 .q-person__remove { margin-top: 10px; }
 .q-another { margin-top: 28px; }
@@ -113,7 +114,8 @@ body.is-stepped .q-chapter .row__text h2 { font-size: clamp(24px, 2.2vw + 12px, 
 .q-status { margin-top: 14px; }
 .q-status:empty { display: none; }
 .q-contact { margin-top: 18px; font-size: var(--fs-chrome); color: var(--c-muted); }
-.q-contact a { color: var(--c-ink); }
+.q-contact a { color: var(--c-ink); text-decoration: none; }
+body:not(.is-stepped) .q-contact { display: none; }   /* the footer says it just below; the phone's last screen has no footer, so it stays there */
 .q-saved { font-size: var(--fs-chrome); color: var(--c-muted); }
 .q-saved:empty { display: none; }
 .q-thanks .grid { padding-top: 48px; padding-bottom: 160px; }
@@ -123,6 +125,9 @@ body.is-stepped .q-chapter .row__text h2 { font-size: clamp(24px, 2.2vw + 12px, 
 /* ---- Phone: one question per screen ------------------------------------------ */
 .q-stepper { display: none; }
 @media screen and (max-width: 809.98px) {
+  .q-chips { grid-template-columns: 1fr; }                  /* one answer a line, as the phone menu is */
+  .q-chip { margin-left: 0; }                               /* the box starts on the fields' edge */
+  .q-chip span { min-height: 44px; }
   .q-range, .q-range__pad { top: -22px; height: 44px; }   /* a finger-sized target around the line */
   .q-steps { gap: 48px; }
   .q-chapter .grid { padding-bottom: 48px; }
@@ -141,6 +146,7 @@ body.is-stepped .q-stepper {
   background: var(--c-ground); border-top: 1px solid var(--c-rule);
 }
 body.is-stepped .q-stepper .btn { min-width: 96px; justify-content: center; }
+.q-stepper [data-back] svg { transform: rotate(180deg); }   /* as the previous link turns it */
 .q-stepper .btn[hidden] { display: inline-flex !important; visibility: hidden; }   /* keeps the count centred on the first and last screens */
 /* the screen carries on below the bar: fade into it, so the cut reads as "more", not "the end" */
 body.is-stepped.has-more .q-stepper::before {
