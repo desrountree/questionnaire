@@ -118,6 +118,7 @@ body.is-stepped .q-chapter .row__text h2 { font-size: clamp(24px, 2.2vw + 12px, 
 body:not(.is-stepped) .q-contact { display: none; }   /* the footer says it just below; the phone's last screen has no footer, so it stays there */
 .q-saved { font-size: var(--fs-chrome); color: var(--c-muted); }
 .q-saved:empty { display: none; }
+.q-page .docmeta { grid-template-columns: 1fr auto; column-gap: var(--gutter); align-items: baseline; }   /* "Saved" sits on the title's line, so the rule under the document details never moves and the header stays on it (1 Oct) */
 .q-thanks .grid { padding-top: 48px; padding-bottom: 160px; }
 .q-thanks .q-steps { grid-column: 1 / -1; }
 .q-thanks__text { font-size: var(--fs-h2); line-height: 1.25; font-weight: 700; letter-spacing: -0.01em; }

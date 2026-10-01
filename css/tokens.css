@@ -48,6 +48,8 @@
   --c-surface:      #FFFFFF;  /* cards, buttons */
   --c-ink:          #141414;  /* main text */
   --c-muted:        #62605B;  /* secondary text */
+  --c-title:        var(--c-ink);    /* hierarchy by tone, not weight (Des, 30 Sep; the Design Conference teardown): titles at the dark end */
+  --c-body:         var(--c-muted);  /* supporting copy at the lighter end: 6:1 on the ground, 6.4:1 on white, passes AA */
   --c-rule:         #DDDBD6;  /* hairlines between rows */
   --c-panel-border: #CCCAC4;  /* border around image panels */
   --c-panel-fill:   #E9E7E2;  /* empty image placeholder */
@@ -71,8 +73,8 @@
   --gutter: 20px;
   --row-gap: 20px;
   --row-pad-bottom: 80px;
-  --header-h: 220px;        /* coloured header on every page but the first */
-  --header-h-home: 589px;   /* taller header on the first page */
+  --header-h: 220px;        /* coloured header on every page but the first (tablet, phone, no JavaScript); on desktop js/chapter-header.js ends it on the rule under the document details */
+  --header-h-home: 589px;   /* taller header on the first page (tablet, phone, no JavaScript); on desktop js/home-header.js ends it on the menu's bottom rule */
   --panel-ratio: 1.61;
   --topbar-h: 64px;
 }
