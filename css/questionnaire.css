@@ -9,10 +9,10 @@
 
 /* ---- Chapters: the guidelines row grid, title on the left ----------------- */
 /* chapter titles use the guidelines' row-title size ("Overview"), not the big "Introduction" size:
-   seven of them on one page would shout */
-.q-chapter .row__text h2 { font-size: var(--fs-body); line-height: var(--lh-body); font-weight: 700; letter-spacing: -0.01em; }
+   seven of them on one page would shout. Weight and tone are the row title's too: regular, at the dark end (Des, 1 Oct: the 30 Sep tone-not-weight rule) */
+.q-chapter .row__text h2 { font-size: var(--fs-body); line-height: var(--lh-body); font-weight: var(--weight-regular); color: var(--c-title); letter-spacing: -0.01em; }
 /* on a phone each screen holds one chapter, so its title keeps the larger size it started with (Des, 25 Sep) */
-body.is-stepped .q-chapter .row__text h2 { font-size: clamp(24px, 2.2vw + 12px, var(--fs-h2)); line-height: 1.2; }
+body.is-stepped .q-chapter .row__text h2 { font-size: clamp(24px, 2.2vw + 12px, var(--fs-h2)); line-height: 1.2; font-weight: var(--weight-medium); }   /* a big heading: 500, as the guidelines' */
 .q-chapter__num { color: var(--c-muted); font-variant-numeric: tabular-nums; }
 .q-intro { margin-top: .6em; }
 .q-chapter .grid { padding-bottom: 64px; }
@@ -22,14 +22,15 @@ body.is-stepped .q-chapter .row__text h2 { font-size: clamp(24px, 2.2vw + 12px, 
 .q-page .q-step:focus, .q-page .q-step:focus-visible { outline: none; }   /* Next moves focus to the screen, not a frame round it */
 .q-step { min-width: 0; outline: none; }
 .q-text + .q-text, .q-text + .q-bullets, .q-bullets + .q-text, .q-text + .q-field { margin-top: 1em; }
+.q-text, .q-bullets { color: var(--c-body); }   /* running copy at the lighter end, as the guidelines' row copy, so a regular-weight title still stands out */
 .q-bullets { list-style: disc; padding-left: 1.2em; }
 .q-bullets li + li { margin-top: .35em; }
 .q-bullets + .q-text { margin-top: 1em; }
 
 /* ---- One question ----------------------------------------------------------- */
 .q-field { border: 0; margin: 0; padding: 0; min-width: 0; }
-.q-label { display: block; padding: 0; margin-bottom: 12px; font-weight: 650; letter-spacing: -0.01em; }
-.q-label--small { font-size: var(--fs-chrome); font-weight: 600; margin-bottom: 8px; }
+.q-label { display: block; padding: 0; margin-bottom: 12px; font-weight: var(--weight-regular); color: var(--c-title); letter-spacing: -0.01em; }   /* a question stands out by tone, not weight */
+.q-label--small { font-size: var(--fs-chrome); margin-bottom: 8px; }
 .q-hint { color: var(--c-muted); margin: -6px 0 14px; }
 
 .qform textarea, .qform input[type="text"] {
@@ -121,7 +122,7 @@ body:not(.is-stepped) .q-contact { display: none; }   /* the footer says it just
 .q-page .docmeta { grid-template-columns: 1fr auto; column-gap: var(--gutter); align-items: baseline; }   /* "Saved" sits on the title's line, so the rule under the document details never moves and the header stays on it (1 Oct) */
 .q-thanks .grid { padding-top: 48px; padding-bottom: 160px; }
 .q-thanks .q-steps { grid-column: 1 / -1; }
-.q-thanks__text { font-size: var(--fs-h2); line-height: 1.25; font-weight: 700; letter-spacing: -0.01em; }
+.q-thanks__text { font-size: var(--fs-h2); line-height: 1.25; font-weight: var(--weight-medium); letter-spacing: -0.01em; }
 
 /* ---- Phone: one question per screen ------------------------------------------ */
 .q-stepper { display: none; }
